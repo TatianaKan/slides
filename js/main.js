@@ -10,7 +10,6 @@ let slideCount = slides.length;
 let currentSlide = 0;
 let isPlaying = true;
 
-
 function gotoSlide(n) {
 
     slides[currentSlide].classList.toggle('active');
@@ -21,9 +20,7 @@ function gotoSlide(n) {
 }
 
 const prevSlide = () => gotoSlide(currentSlide - 1)
-
 const nextSlide = () => gotoSlide(currentSlide + 1)
-
 
 function pause() {
     if (isPlaying) {
@@ -59,15 +56,21 @@ function indicate(e) {
         gotoSlide(+index);
     }
 }
-    timerID = setInterval(nextSlide, 2000);
 
-    pauseBtn.addEventListener('click', pausePlay);
+function pressKey(e) {
+    console.log(e.key)
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === ' ') pausePlay();
+}
+timerID = setInterval(nextSlide, 2000);
 
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
+pauseBtn.addEventListener('click', pausePlay);
+prevBtn.addEventListener('click', prev);
+nextBtn.addEventListener('click', next);
 
-    indicatorsContainer.addEventListener('click', indicate);
-
+indicatorsContainer.addEventListener('click', indicate);
+document.addEventListener('keydown', pressKey);
 
 
 
