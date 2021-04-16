@@ -1,4 +1,7 @@
 let slides = document.querySelectorAll('.slide');
+const indicatorsContainer = document.querySelector('#indicators-container');
+const indicators = document.querySelectorAll('.indicator')
+// console.log(indeficatorsContainer);
 const pauseBtn = document.querySelector('#pause-btn');
 const prevBtn = document.querySelector('#prev-btn');
 const nextBtn = document.querySelector('#next-btn');
@@ -11,9 +14,10 @@ let isPlaying = true;
 function gotoSlide(n) {
 
     slides[currentSlide].classList.toggle('active');
-
+    indicators[currentSlide].classList.toggle('active');
     currentSlide = (n + slideCount) % slideCount;
     slides[currentSlide].classList.toggle('active');
+    indicators[currentSlide].classList.toggle('active');
 }
 
 const prevSlide = () => gotoSlide(currentSlide - 1)
@@ -34,21 +38,36 @@ function play() {
     pauseBtn.innerHTML = 'Pause';
 }
 const pausePlay = () => isPlaying ? pause() : play();
-   
+
 function prev() {
     pause();
     prevSlide();
 }
 function next() {
     play();
-    nextSlide;
+    nextSlide();
 }
-timerID = setInterval(nextSlide, 2000);
 
-pauseBtn.addEventListener('click', pausePlay);
+function indicate(e) {
+    let target = e.target;
 
-prevBtn.addEventListener ('click', prev);
-nextBtn.addEventListener ('click', next);
+    const index = target.getAttribute(`data-slide-to`);
+    if (target && target.classList.contains(`indicator`)) {
+
+        // console.log(index);
+        pause();
+        gotoSlide(+index);
+    }
+}
+    timerID = setInterval(nextSlide, 2000);
+
+    pauseBtn.addEventListener('click', pausePlay);
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    indicatorsContainer.addEventListener('click', indicate);
+
 
 
 

@@ -65,16 +65,29 @@ just for appearance; change whatever you want
     background: rgb(204, 48, 204);
 }
 
+.indicators {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.indicators,
 .controls {
     display: flex;
     gap: 10px;
     margin: 10px 0;
-    
-
 }
+
+.indicator,
 .control {
     background-color: gray;
     color: white;
     padding: 10px 15px;
     cursor: pointer;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 20px;
+}
+
+.indicator.active {
+    background-color: tomato;
 }
