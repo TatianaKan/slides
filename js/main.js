@@ -1,4 +1,5 @@
-let slides = document.querySelectorAll('.slide');
+(function () {
+    let slides = document.querySelectorAll('.slide');
 const indicatorsContainer = document.querySelector('#indicators-container');
 const indicators = document.querySelectorAll('.indicator')
 // console.log(indeficatorsContainer);
@@ -10,9 +11,9 @@ let slideCount = slides.length;
 let currentSlide = 0;
 let isPlaying = true;
 
-const SPACE=' ';
-const LEFT_ARROW='ArrowLeft';
-const RIGHT_ARROW='ArrowRight';
+const SPACE = ' ';
+const LEFT_ARROW = 'ArrowLeft';
+const RIGHT_ARROW = 'ArrowRight';
 const FA_PAUSE = `<i class="fa fa-pause"></i>`;
 const FA_PLAY = `<i class="fa fa-play"></i>`;
 
@@ -69,15 +70,20 @@ function pressKey(e) {
     if (e.key === 'ArrowRight') next();
     if (e.key === ' ') pausePlay();
 }
-timerID = setInterval(nextSlide, 2000);
 
-pauseBtn.addEventListener('click', pausePlay);
-prevBtn.addEventListener('click', prev);
-nextBtn.addEventListener('click', next);
+function initisteners() {
+    pauseBtn.addEventListener('click', pausePlay);
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    indicatorsContainer.addEventListener('click', indicate);
+    document.addEventListener('keydown', pressKey);
+}
 
-indicatorsContainer.addEventListener('click', indicate);
-document.addEventListener('keydown', pressKey);
+function init() {
+    initisteners()
+    timerID = setInterval(nextSlide, 2000);
+}
 
-
-
+init();
+})();
 
