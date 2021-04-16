@@ -32,9 +32,9 @@ these make the slideshow work
 non-essential styles:
 just for appearance; change whatever you want
 */
-.carousel {
+/* .carousel {
     
-}
+} */
 
 .slide {
     font-size: 40px;
@@ -90,4 +90,8 @@ just for appearance; change whatever you want
 
 .indicator.active {
     background-color: tomato;
+}
+.fa {
+    color: white;
+    padding: 2px 0 0 2px;
 }

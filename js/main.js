@@ -10,6 +10,12 @@ let slideCount = slides.length;
 let currentSlide = 0;
 let isPlaying = true;
 
+const SPACE=' ';
+const LEFT_ARROW='ArrowLeft';
+const RIGHT_ARROW='ArrowRight';
+const FA_PAUSE = `<i class="fa fa-pause"></i>`;
+const FA_PLAY = `<i class="fa fa-play"></i>`;
+
 function gotoSlide(n) {
 
     slides[currentSlide].classList.toggle('active');
@@ -26,13 +32,13 @@ function pause() {
     if (isPlaying) {
         clearInterval(timerID);
         isPlaying = !isPlaying;
-        pauseBtn.innerHTML = 'Play';
+        pauseBtn.innerHTML = FA_PLAY;
     }
 }
 function play() {
     timerID = setInterval(nextSlide, 1000);
     isPlaying = !isPlaying;
-    pauseBtn.innerHTML = 'Pause';
+    pauseBtn.innerHTML = FA_PAUSE;
 }
 const pausePlay = () => isPlaying ? pause() : play();
 
