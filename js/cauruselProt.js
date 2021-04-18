@@ -2,8 +2,7 @@ function Caurusel(containerID = '#caurusel', slide = '.slide', inretval = 3000) 
     this.container = document.querySelector(containerID);
     // let timerID;
     this.slides = this.container.querySelectorAll(slide);
-    this.indicatorsContainer = this.container.querySelector('#indicators-container');
-    this.indicators = this.indicatorsContainer.querySelectorAll('.indicator')
+
     // console.log(indeficatorsContainer);
 
     this.interval = inretval;
@@ -33,7 +32,7 @@ Caurusel.prototype = {
         const prev = `<span id="prev-btn" class="control control-prev">${this.FA_PREV}</span>`;
         const next = `<span id="next-btn" class="control control-next">${this.FA_NEXT}</span>`
 
-        controls.setAttribute('class', 'controls')
+        controls.setAttribute('class', 'controls');
         controls.innerHTML = pause + prev + next;
         this.container.appendChild(controls);
 
@@ -42,22 +41,38 @@ Caurusel.prototype = {
         this.nextBtn = this.container.querySelector('#next-btn');
 
     },
-    __initIndicators() {
+    _initIndicators() {
+        const indicators = document.createElement('ol');
 
+        indicators.setAttribute('class', 'indicators');
+        for (let i = 0, n = this.slideCount; i < n; i++) {
+            const indicator = document.createElement('li');
+            indicator.setAttribute('class', 'indicator');
+            indicator.setAttribute('data-slide-to', `${i}`);
+            i=== 0 && indicator.classList.add ('active');
+
+            indicators.appendChild(indicator);
+        }
+
+        this.container.appendChild(indicators);
+
+        this.indContainer = this.container.querySelector('.indicators');
+        this.indItem = this.container.querySelectorAll('.indicator');
+        
     },
     _initListeners() {
         this.pauseBtn.addEventListener('click', this.pausePlay.bind(this));
         this.prevBtn.addEventListener('click', this.prev.bind(this));
         this.nextBtn.addEventListener('click', this.next.bind(this));
-        this.indicatorsContainer.addEventListener('click', this.indicate.bind(this));
+        this.indContainer.addEventListener('click', this.indicate.bind(this));
         document.addEventListener('keydown', this.pressKey.bind(this));
     },
     gotoSlide(n) {
         this.slides[this.currentSlide].classList.toggle('active');
-        this.indicators[this.currentSlide].classList.toggle('active');
+        this.indItem[this.currentSlide].classList.toggle('active');
         this.currentSlide = (n + this.slideCount) % this.slideCount;
         this.slides[this.currentSlide].classList.toggle('active');
-        this.indicators[this.currentSlide].classList.toggle('active');
+        this.indItem[this.currentSlide].classList.toggle('active');
     },
     prevSlide() {
         this.gotoSlide(this.currentSlide - 1);
@@ -106,8 +121,8 @@ Caurusel.prototype = {
 
     init() {
         this._initProps();
+        this._initIndicators();
         this._initControls();
-        // this._initIndicators();
         this._initListeners();
         this.timerID = setInterval(() => this.nextSlide(), this.interval);
     }
