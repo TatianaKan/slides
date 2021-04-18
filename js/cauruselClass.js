@@ -1,7 +1,7 @@
 class Caurusel {
     constructor(p) {
         // let settings = this._initConfig(p);
-        let settings = (() => ({...{containerID: '#caurusel', slide: '.slide', isPlaying: true, interval: 3000 },...p}))()
+        let settings = (() => ({ ...{ containerID: '#caurusel', slide: '.slide', isPlaying: true, interval: 3000 }, ...p }))()
         // console.log(settings);
         // containerID = '#caurusel', slide = '.slide', interval = 3000
         this.container = document.querySelector(settings.containerID);
