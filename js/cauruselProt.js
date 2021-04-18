@@ -6,9 +6,6 @@ function Caurusel(containerID = '#caurusel', slide = '.slide', inretval = 3000) 
     // console.log(indeficatorsContainer);
 
     this.interval = inretval;
-
-
-
 }
 
 Caurusel.prototype = {

@@ -1,15 +1,23 @@
 class Caurusel {
-    constructor(containerID = '#caurusel', slide = '.slide', inretval = 3000) {
-        this.container = document.querySelector(containerID);
-        this.slides = this.container.querySelectorAll(slide);
-
-        this.interval = inretval;
+    constructor(p) {
+        // let settings = this._initConfig(p);
+        let settings = (() => ({...{containerID: '#caurusel', slide: '.slide', isPlaying: true, interval: 3000 },...p}))()
+        // console.log(settings);
+        // containerID = '#caurusel', slide = '.slide', interval = 3000
+        this.container = document.querySelector(settings.containerID);
+        this.slides = this.container.querySelectorAll(settings.slide);
+        this.interval = settings.interval;
+        this.isPlaying = settings.isPlaying;
     }
+    // _initConfig(o) {
+    //     let p = {containerID: '#caurusel', slide: '.slide', isPlaying: false, interval: 3000 };
+    //     return {...p,...o};
+    // }
+
     _initProps() {
         this.slideCount = this.slides.length;
 
         this.currentSlide = 0;
-        this.isPlaying = true;
 
         this.SPACE = ' ';
         this.LEFT_ARROW = 'ArrowLeft';
@@ -98,7 +106,7 @@ class Caurusel {
         this.nextSlide();
     }
     _indicate(e) {
-        let target = this.e.target;
+        let target = e.target;
         // const index = this.target.getAttribute(`data-slide-to`);
         if (target && target.classList.contains(`indicator`)) {
             // console.log(index);
@@ -118,7 +126,8 @@ class Caurusel {
         this._initIndicators();
         this._initControls();
         this._initListeners();
-        this.timerID = setInterval(() => this.nextSlide(), this.interval);
+        if (this.isPlaying)
+            this.timerID = setInterval(() => this.nextSlide(), this.interval);
     }
 }
 
