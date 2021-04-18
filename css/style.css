@@ -88,6 +88,10 @@ just for appearance; change whatever you want
     border-radius: 20px;
 }
 
+/* .controls {
+    display: none;
+} */
+
 .indicator.active {
     background-color: tomato;
 }
