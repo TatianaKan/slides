@@ -48,7 +48,8 @@ Caurusel.prototype = {
         for (let i = 0, n = this.slideCount; i < n; i++) {
             const indicator = document.createElement('li');
             indicator.setAttribute('class', 'indicator');
-            indicator.setAttribute('data-slide-to', `${i}`);
+            // indicator.setAttribute('data-slide-to', `${i}`);
+            indicator.dataset.slideTo= `${i}`;
             i=== 0 && indicator.classList.add ('active');
 
             indicators.appendChild(indicator);
@@ -105,11 +106,11 @@ Caurusel.prototype = {
     },
     indicate(e) {
         let target = this.e.target;
-        const index = this.target.getAttribute(`data-slide-to`);
+        // const index = this.target.getAttribute(`data-slide-to`);
         if (target && target.classList.contains(`indicator`)) {
             // console.log(index);
             this.pause();
-            this.gotoSlide(+index);
+            this.gotoSlide(+target.dataset.slideTo);
         }
     },
     pressKey(e) {
