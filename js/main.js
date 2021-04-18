@@ -3,7 +3,7 @@
 const caurusel = new SwipeCaurusel({
     // containerID: '.my-caurusel',
      slide: '.slide',
-     interval: 1000,
+     interval: 3000,
     //  isPlaying: false
 });
 
